@@ -23,17 +23,10 @@ class Program
     static Dictionary<string, int> ContarFuncionariosPorDepartamento(List<string> departamentos)
     {
         var contagem = new Dictionary<string, int>();
-        for(int i = 0; i < departamentos.Count; i++)
+        departamentos.ForEach(d =>
         {
-            if (contagem.ContainsKey(departamentos[i]))
-            {
-                contagem[departamentos[i]] += 1;
-            }
-            else
-            {
-                contagem.Add(departamentos[i], 1);
-            }
-        }
+            if (!contagem.TryAdd(d, 1)) contagem[d] += 1;
+        });
         return contagem;
     }
 }
